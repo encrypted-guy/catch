@@ -1,0 +1,128 @@
+    <!----------------------------------------------------------------------->
+    <!--footer-->
+    <% if(user){ %>
+        <% if(user.role === 'seller'){ %>
+        <div class="addnew">
+            <a href="/add/product" class="btn-floating onelargescreen btn-large waves-effect spical-background">
+                <i class="material-icons spical">add</i>
+            </a>
+        </div>
+        <% } %>
+    <% } %>
+    <div  class="mobile-footer z-depth-1" id="transition">
+        <div class="navbar-footer">
+            <div class="first">
+                <% if(user) { %>
+                    <a href="/user/myfavorites/<%= user.id %>">
+                        <i class="material-icons">favorite</i>
+                        <small class="nav-nname">Favorite</small>
+                    </a>
+                <% } else { %> 
+                    <a style="cursor: pointer;" onclick="logintofav()">
+                        <i class="material-icons">favorite</i>
+                        <small class="nav-nname">Favorite</small>
+                    </a>
+                <% } %>
+            </div>
+            <div class="secound nav-foo-main-btn">
+                <% if(user){ %>
+                    <% if(user.role === 'seller'){ %>
+                        <a href="/add/product" class="btn-floating btn-large waves-effect spical-background">
+                            <i class="material-icons spical">add</i>
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+            <div class="third">
+                <a href="/gallery">
+                    <i class="material-icons">collections</i>
+                    <small class="nav-nname">Gallery</small>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="scrollup_button">
+        <button id="scrolltop" class="waves-effect  red lighten-1 btn-flat">
+            <i class="material-icons">arrow_drop_up</i>
+        </button>
+    </div>
+
+    <footer>    
+        <div class="footer-list">
+            <div class="footer-box footer-1">
+                <ul>
+                    <li> <h5>Quick Links</h5> </li>
+                    <li><a href="/"> Catch </a></li>
+                    <li><a href="/cart"> cart </a></li>
+                    <% if(user) { %>
+                        <li><a href="/user/myfavorites/<%= user.id %>"> Favorites </a></li>
+                    <% } else { %>
+                        <li  ><a onclick="logintofav()" > Favorites </a></li>
+                    <% } %>
+                    <li><a href="/"> About us </a></li>
+                </ul>
+            </div>
+            <div class="footer-box footer-3">
+                <ul>
+                    <li> <h5>Category</h5> </li>
+                    <li><a href="index.html"> Toys </a></li>
+                    <li><a href="Shop.html"> Food </a></li>
+                    <li><a href="blog.html"> Luxury </a></li>
+                    <li><a href="About.html"> clothes </a></li>
+                </ul>
+            </div>
+            <div class="footer-box footer-2">
+                <ul>
+                    <li> <h5>Quick links</h5> </li>
+                    <% if(user){ %>
+                        <li><a href="/user/<%= user._id %>"> Profile </a></li> 
+                    <% } else { %>
+                        <li><a href="/sign-in"> sign in </a></li> 
+                    <% } %>
+                    <li><a href="#"> Privacy </a></li>
+                    <li><a href="#"> Warranty & Returns </a></li>
+                </ul>
+            </div>
+            <div class="footer-box footer-4">
+                <ul>
+                    <li> <h5>See the latest and Follow us</h5> </li>
+                    <li><a href="#"> facebook </a></li>
+                    <li><a href="#"> instergram </a></li>
+                    <li><a href="#"> twitter </a></li>
+                </ul>
+            </div>
+        </div>
+
+    </footer> 
+
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/public/js/meterlix.js"></script>
+    <script src="/public/js/main.js"></script>
+    <script>
+        let css = 'font-size: 2rem; color: #ff1744; font-weight: 900; text-shadow: 1px 1px #eeeeee'
+        console.log("%cHEYY, you came here.. %s", css, 'IG@nafiu.dev');
+    </script>
+    <script>
+        function logintofav(){
+            alert('SIGN IN for favorites')
+        }
+    </script>
+    <% if(messages.error) { %>
+        <div class="alert-main z-depth-1">
+            <div class="alerto">
+                <p><%= messages.error %></p>
+            </div>
+        </div>
+    <% } %>
+    <script>
+        setTimeout(() => {
+            document.querySelector('.alert-main').style.display='none';
+        }, 3000);
+    </script>
+</body>
+
+</html>

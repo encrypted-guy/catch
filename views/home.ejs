@@ -1,0 +1,122 @@
+<%- include('partials/header.ejs') %>
+
+    <section class="container hero-image-main z-depth-1">
+        <div class="heroimage">
+            <img id="imageslider" src="/public/img/showfive.jpg" alt="">
+            <div class="heroText">
+                <h2> <span>Find all of your need in one place.</span> </h2>
+                <p> <span> We provide best services to our customers with fast delivery and new lucky draw every month </span> </p>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!--onlu for phone-->
+    <section class="container mobileFilter-main">
+        <div class="mobilefilter">
+            <div class="each-main">
+                <a href="/?category=Clothes">
+                    <div class=" z-depth-1">
+                        <i class="fas fa-tshirt"></i>
+                        <small>Clothes</small>
+                    </div>
+                </a>
+            </div>
+            <div class="each-main">
+                <a href="?category=Luxury">
+                    <div class="z-depth-1">
+                        <i class="fas fa-gem"></i>
+                        <small>Luxury</small>
+                    </div>
+                </a>
+            </div>
+            <div class="each-main">
+                <a href="?category=Food">
+                    <div class="z-depth-1">
+                        <i class="fas fa-utensils"></i>
+                        <small>Food</small>
+                    </div>
+                </a>
+            </div>
+            <div class="each-main">
+                <a href="?category=Toys">
+                    <div class="z-depth-1">
+                        <i class="fas fa-shapes"></i>
+                        <small>Toys</small>
+                    </div>
+                </a>
+            </div>
+      
+        </div>
+    </section>
+    <!--end-->
+
+    <!-- Products -->
+    <section class="container">
+        <div class="product-all">
+            <div class="product-list">
+
+            <!--form hree   12 -->
+
+            <% for(let i =0; i < products.length; i++) { %>
+
+                <div class="product-each card product">
+                    <a href="/product/<%= products[i].slug %>">
+                        <h4 class="product-title"><%= products[i].title %></h4>
+                    </a>
+                    <img width="250" height="300" alt="<%= products[i].title %>" src="<%= products[i].thumbnail %>">
+                    
+                    <% if(user) { %>
+                        <button value="<%= products[i]._id %>" class="like-each-small add-fav">
+                            <i class="material-icons" id="changeontoggle">favorite</i>
+                        </button>
+                    <% } else { %>
+                        <div  class="like-each-small " onclick="logintoadd()">
+                            <i class="material-icons" >favorite</i>
+                        </div>
+                    <% } %>
+                    <div class="product-btns">
+                        <p>$<span class="product-price"><%= parseFloat(products[i].price).toFixed(2) %> </span></p>
+                        <!-- <button value="<%= products[i]._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></button> -->
+                        <a href="/add/cart/<%= products[i]._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></a>
+                    </div>
+                    <input type="hidden" value="<%= products[i]._id %>">
+                </div>
+
+            <% } %>
+            <!---to here-->
+            
+
+                <!-------------->
+            </div>
+        </div>
+        </div>
+        
+        <div class="pagination-block ">
+            <ul class="pagination center">
+                <% if(paginationPREV != '') { %>
+                    <li class=""><a href="<%= paginationPREV.Prvpageurl %>"><i class="material-icons">chevron_left</i></a></li>
+                    <li class=""><a href="<%= paginationPREV.Prvpageurl %>"><%= paginationPREV.page %></a></li>
+                <% } %>
+                <li class="active"><a href="<%= paginationCUTTENT.currentpageurl %>"><%= paginationCUTTENT.page %></a></li>
+                
+                <% if(paginationNEXT != '') { %>
+                    <li class=""><a href="<%= paginationNEXT.Nextpageurl %>"><%= paginationNEXT.page %></a></li>
+                    <li class=""><a href="<%= paginationNEXT.Nextpageurl %>"><i class="material-icons">chevron_right</i></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </section>
+    
+    <div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+    <script src="/public/js/home.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/public/js/addfav.js"></script>
+    <script>
+        function logintoadd(){
+            alert('SIGN IN to add favorites')
+        }
+    </script>
+
+<%- include('partials/footer.ejs') %>

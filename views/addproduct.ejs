@@ -1,0 +1,46 @@
+<%- include('partials/header.ejs') %>
+
+
+<section class="contact container scrollspy" id="contact">
+    <div class=" contact-heading z-depth-1 center">
+        <h3>Add a new product</h3>
+
+        <div class="row   registerform-main">
+            <div class="col s12 m12">
+                <form action="/add/product" enctype="multipart/form-data" method="POST">
+                    <div class="filds-files">
+                        <p>select an image as thumbnail</p>
+                        <input type="file" name="thumbnail" accept="image/*"  class="file-input__input"/>
+                    </div>
+                    <div class="filds">
+                        <input  type="text" name="title"  placeholder="Name of product">
+                    </div>
+                
+                    <div class="filds">
+                        <input type="text" name="price"  placeholder="Price of product" required>
+                    </div>
+                    <select name="category">
+                        <option > select a category</option>
+                        <option value="Clothes">Clothes</option>
+                        <option value="Luxury">Luxury</option>
+                        <option value="Food">Food</option>
+                        <option value="Toys">Toys</option>
+                    </select>
+                    <div class="filds">
+                        <input type="text" name="description"  placeholder="short detail about the product" required>
+                    </div>
+                    <div class="filds-files">
+                        <p>select some images as product view</p>
+                        <input type="file" name="gallery" accept="image/*"  class="file-input__input" multiple/>
+                    </div>
+                   
+                    <button class="btn red lighten-1 form-submit" type="submit">add to shop</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+<%- include('partials/footer.ejs') %>

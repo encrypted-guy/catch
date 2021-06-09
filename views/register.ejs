@@ -1,0 +1,78 @@
+<%- include('partials/header.ejs') %>
+
+
+<section class="contact container scrollspy" id="contact">
+    <div class=" contact-heading z-depth-1 center">
+        <h3>sign up</h3>
+
+        <div class="row   registerform-main">
+            <div class="col s12 m12">
+                <form action="/sign-up" method="POST" >
+                    <div class="filds">
+                        <input  type="text" name="name"  placeholder="Full Name" required>
+                    </div>
+                    <div class="filds">
+                        <input type="email" name="email"  placeholder="E-mail" required>
+                    </div>
+                    <div class="filds">
+                        <input type="text" name="phone"  placeholder="phone number" >
+                    </div>
+                    <div class="filds">
+                        <input type="text"  name="address"  placeholder="Address" required>
+                    </div>
+                    <div class="filds">
+                        <input type="text" name="zipcode"  placeholder="Zipcode" required>
+                    </div>
+                    <select name="role">
+                        <option value="customer"  selected> I Want to buy</option>
+                        <option value="seller"> I want to sell</option>
+                      </select>
+                    <div class="filds">
+                        <input type="text" name="city"  placeholder="city" required>
+                    </div>
+                    
+
+                    <div class="filds">
+                        <input type="password" name="password" id="password"  placeholder="password" required>
+                    </div>
+                    <div class="filds">
+                        <input type="password" name="password2" id="password2"  placeholder="confirm password" required>
+                    </div>
+
+
+                    <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">call_to_action</i>Cradit card infomation</div>
+                          <div class="collapsible-body">
+                            <div class="cradit-card">
+                                <p>Name </p>
+                                <input class="input-feilds" type="text" >
+                                
+                                <p>Card Number </p>
+                                <input class="input-feilds" type="text" >
+                                <div class="exp-numbers">
+                                    <div class="exp-box-1">
+                                        <p> Exp (mm/yy) </p>
+                                        <input class="input-feilds" type="text" >
+                                    </div>
+                                    <div class="exp-box-2">
+                                        <p>Security Code</p>
+                                        <input class="input-feilds Security" type="text" >
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </li>
+                    </ul>
+
+                    <button class="btn red lighten-1 form-submit" type="submit">sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+
+<%- include('partials/footer.ejs') %>

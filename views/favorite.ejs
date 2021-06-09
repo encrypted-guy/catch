@@ -1,0 +1,51 @@
+<%- include('partials/header.ejs') %>
+
+
+
+<% if(user) { %>
+    <% if(user.id == userid) { %>
+    <div class="card listed-product-title">
+        <p>listed on favorite</p>
+    </div>
+
+        <!-- Products -->
+        <section class="container">
+            <div class="product-all">
+                <div class="product-list">
+
+                    <!--form hree   12 -->
+                    <% favorites.forEach(fav => { %>
+                        <div class="product-each card product">
+                            <a href="/product/<%= fav.slug %>">
+                                <h4 class="product-title"><%= fav.title %></h4>
+                            </a>
+                            <img width="250" height="300" src="<%= fav.thumbnail %>">
+
+                            <div class="like-each-small" style="color:#ff1744 ;">
+                                <i class="material-icons" >favorite</i>
+                            </div>
+                            <div class="product-btns">
+                                <p>$<span class="product-price"> <%= parseFloat(fav.price).toFixed(2) %></span></p>
+                                <a href="/add/cart/<%= fav._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></a>
+                            </div>
+                            <input type="hidden" value="<%= fav._id %>">
+                        </div>
+                    <% }) %>
+                    <!---to here-->
+    
+                    <!-------------->
+                </div>
+            </div>
+            </div>
+
+        </section>
+
+
+
+    <div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+    <% } %>
+<% }  else { %>
+    <div style="height: 600px;" class="fixcraxyspaceimaidiot"></div>
+<% } %>
+
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,42 @@
+<%- include('partials/header.ejs') %>
+
+
+<section class="contact container scrollspy" id="contact">
+    <div class=" contact-heading z-depth-1 center">
+        <h3>EDIT product</h3>
+
+        <div class="row   registerform-main">
+            <div class="col s12 m12">
+                <form method="POST" action="/product/edit/<%= product._id %>" >
+                    <div class="filds">
+                        <input name="title" value="<%= product.title %>"  type="text"  placeholder="Name of product">
+                    </div>
+                
+                    <div class="filds">
+                        <input type="text" name="price" value="<%= product.price %>"  placeholder="Price of product">
+                    </div>
+
+                    <div class="filds">
+                        <input type="text" name="description" value="<%= product.description %>"  placeholder="short detail about the product">
+                    </div>
+                   
+                    <button class="btn red lighten-1 form-submit" type="submit">EDIT AND SAVE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="itemcheck outliner">
+        <p>OR</p>
+        <br>
+        <a href="/product/Remove/<%= product._id %>" class="btn center red lighten-1 form-submit" type="submit">REMOVE PRODUCT</a>
+    </div>
+</section>
+
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+
+<%- include('partials/footer.ejs') %>
+ 

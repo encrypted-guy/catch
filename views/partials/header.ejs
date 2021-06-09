@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff1744">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>catch</title>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="nav-wrapper white">
+            <div class="container">
+                <a href="/" class="brand-logo left">
+                    <div class="logo-position">
+                        <img width="70px" src="/public/img/LOGO.png" alt="">
+                    </div>
+                </a>
+                <!--cart qty amount calulation-->
+                <% let qtytotal = 0; %>
+                <% if(typeof cart != 'undefined') { %>
+                    <% cart.forEach((product) => { %>
+                        <% qtytotal += +product.qty %>
+                    <% }) %>
+                <% } %>
+
+            
+                <% if(user){ %>
+                    <a href="#" class="sidenav-trigger login-color right" data-target="mobile-links"> 
+                        <div class="profile profile-mobile">
+                            <img  src="/public/img/avater.png" alt="profile">
+                        </div>
+                    </a>
+                <% } else { %>
+                    <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                    
+                        <div class="nav-link-mobile nav-link-set">
+                            <i class="large one black-text material-icons"> menu</i>
+                            <span class="two three"></span>
+                        </div>
+                    </a>
+                <% } %>
+
+                <!--cart mobile-->
+                <a class="sidenav-trigger right nav-link-a grey-text text-darken-4" href="/cart">
+                    <div class="nav-link-mobile nav-link-set">
+                        <i class="large one black-text material-icons">shopping_cart</i>
+                        <span class="two cartvaluehere three"> <%= qtytotal %> </span>
+                    </div>
+                </a>
+                
+                <!--nav list starts here-->
+                <ul class="right text-black hide-on-med-and-down">
+
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Clothes">
+                        <div class="nav-link-set">
+                            <span class="one"><small> category </small></span>
+                            <span class="two"> Clothes </span>
+                        </div>
+                    </a></li>
+
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Luxury">
+                        <div class="nav-link-set">
+                            <span class="one"><small> category </small></span>
+                            <span class="two"> Luxury </span>
+                        </div>
+                    </a></li>
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Food">
+                        <div class="nav-link-set">
+                            <span class="one"><small> category </small></span>
+                            <span class="two"> Food </span>
+                        </div>
+                    </a></li>
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Toys">
+                        <div class="nav-link-set">
+                            <span class="one"><small> category </small></span>
+                            <span class="two"> Toys </span>
+                        </div>
+                    </a></li>
+
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/gallery">
+                        <div class="nav-link-set">
+                            <span class="one"><small> All Photos </small></span>
+                            <span class="two"> Gallery </span>
+                        </div>
+                    </a></li>
+
+                    <% if(user) { %>
+                        <li><a class="nav-link-a grey-text text-darken-4" href="/user/myfavorites/<%= user.id %>">
+                            <div class="nav-link-set">
+                                <span class="one"><small> saved items </small></span>
+                                <span class="two"> Favorite </span>
+                            </div>
+                        </a></li>
+                    <% } else { %>
+                        <li><a class="nav-link-a grey-text text-darken-4" onclick="logintofav()">
+                            <div class="nav-link-set">
+                                <span class="one"><small> saved items </small></span>
+                                <span class="two"> Favorite </span>
+                            </div>
+                        </a></li>
+                    <% } %>
+                    <li><a class="nav-link-a grey-text text-darken-4" href="/cart">
+                        <div class="nav-link-set">
+                            <i class="large one black-text material-icons">shopping_cart</i>
+                            <span class="two cartvaluehere three"> <%= qtytotal %> </span>
+                        </div>
+                    </a></li>
+
+
+
+                    <!--here the login and function-->
+                    <% if(user){ %>
+                        <li><a class="nav-link-a grey-text  text-darken-4" href="/user/<%= user._id %>">
+                            <div class="profile">
+                                <img width="40px" class="desktop-home-profile" src="/public/img/avater.png" alt="">
+                            </div>
+                        </a></li>
+                    <% } else { %>
+                        <li>
+                            <a href="/sign-in" class="waves-effect  red lighten-1 btn">sign in</a>
+                        </li>
+                    <% } %>
+                    <!--end here the login and function-->
+
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav " id="mobile-links">
+        <li class="center "><a href=""></a></li>
+        <% if(user){ %>
+            <li><a class="nav-link-a grey-text text-darken-4" href="/user/<%= user._id %>">
+                <div class="nav-link-set">
+                    <span class="one"><small> <%= user.name %> </small></span>
+                    <span class="two four"> Profile </span>
+                </div>
+            </a></li>  
+        <% } %>
+
+        <li class="hide-when"><a class="nav-link-a grey-text text-darken-4 " href="/gallery">
+            <div class="nav-link-set">
+                <span class="one"><small> All Photos </small></span>
+                <span class="two"> Gallery </span>
+            </div>
+        </a></li>
+
+        <% if(user) { %>
+            <li class="hide-when"><a class="nav-link-a grey-text text-darken-4" href="/user/myfavorites/<%= user.id %>">
+                <div class="nav-link-set">
+                    <span class="one"><small> saved items </small></span>
+                    <span class="two"> Favorite </span>
+                </div>
+            </a></li>
+        <% } else { %>
+            <li class="hide-when"><a class="nav-link-a grey-text text-darken-4 " onclick="logintofav()">
+                <div class="nav-link-set">
+                    <span class="one"><small> saved items </small></span>
+                    <span class="two"> Favorite </span>
+                </div>
+            </a></li>
+        <% } %>
+
+        <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Clothes">
+            <div class="nav-link-set">
+                <span class="one"><small> category </small></span>
+                <span class="two"> Clothes </span>
+            </div>
+        </a></li>
+
+        <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Luxury">
+            <div class="nav-link-set">
+                <span class="one"><small> category </small></span>
+                <span class="two"> Luxury </span>
+            </div>
+        </a></li>
+        <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Food">
+            <div class="nav-link-set">
+                <span class="one"><small> category </small></span>
+                <span class="two"> Food </span>
+            </div>
+        </a></li>
+        <li><a class="nav-link-a grey-text text-darken-4" href="/?category=Toys">
+            <div class="nav-link-set">
+                <span class="one"><small> category </small></span>
+                <span class="two"> Toys </span>
+            </div>
+        </a></li>
+
+   
+
+        <% if(!user){ %>
+            <li>
+                <a href="/sign-in" class="waves-effect  red lighten-1 btn">sign in</a>
+            </li>
+        <% } %>
+    </ul>
+    <!--end of nav bar-->
+    <!----------------------------------------------------------------------->

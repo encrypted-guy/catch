@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs') %>
+
+<section class="contact container scrollspy" id="contact">
+    <div class=" contact-heading z-depth-1 center">
+        <h3>sign in</h3>
+
+        <!-- <% if(messages.error) { %>
+            <%= messages.error %>
+        <% } %> -->
+        
+
+        <div class="row   registerform-main">
+            <div class="col s12 m12">
+                <form action="/sign-in" method="POST">
+                    <div class="filds">
+                        <input  type="email" name="username" placeholder="E-mail">
+                    </div>
+                    <div class="filds">
+                        <input type="password" name="password"  placeholder="password">
+                    </div>
+                    
+                    <button class="btn red lighten-1 form-submit" type="submit">sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <span class="sin-links">Dont have an account <a href="/sign-up">sign up</a> </span>
+    <br>
+    <!-- <span class="sin-links"><a href="">Forgot password.?</a> </span> -->
+    
+
+</section>
+
+<div style="height: 400px;" class="fixcraxyspaceimaidiot"></div>
+
+
+
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,128 @@
+<%- include('partials/header.ejs') %>
+
+<section class="container">
+
+    <!-- products view -->
+    <section class="product-view">
+        <h2 class="on-res-title">Black cup</h2>
+        <!--title-->
+        <div class="image z-depth-1">
+             <img src="<%= product.thumbnail %>" class="changeimage" alt="<%= product.title %>">
+        </div>
+
+        <div class="pricing">
+            <h2 class="title-product-view"><%= product.title %></h2>
+            <span class="small-images">
+
+                <% product.gallery.forEach(galleryimg => { %>
+            
+                    <div class="small-img  z-depth-1">
+                        <img width="50px"  class="modelimage " src="<%= galleryimg %>" alt="">
+                    </div>
+
+                <% }); %>
+            </span>
+
+            <!--title-->
+            <h3>$ <span class="price-number"><%= parseFloat(product.price).toFixed(2) %></span></h3>
+            <small> Description </small>
+            <p class="Description">
+                <%= product.description %>
+            </p>
+            <!-- <button value="<%= product._id %>" class="red lighten-1 btn add-cart">Add to Cart</button> -->
+            <a href="/add/cart/<%= product._id %>" class="red lighten-1 btn add-cart">Add to Cart</a>
+            <p><small>product posted by</small>: <a href="/user/<%= product.seller._id %>"> <%= product.seller.name %> </a> </p>
+            <p><small>posted AT</small>: <%= product.Time %> </p>
+        </div>
+    </section>
+
+    <!--heading mains-->
+    <section class="show-heading">
+        <h3> <span> related products. </span></h3>
+    </section>
+
+
+</section>
+
+<!-- Products -->
+<section class="container">
+    <div class="product-all">
+        <div class="product-list">
+
+            <!--form hree   4 -->
+            <% if( relativecount  < 4 ) { %>
+                <% for(let i =0; i < products.length; i++) { %>
+                    <div class="product-each card product">
+                        <a href="/product/<%= products[i].slug %>">
+                            <h4 class="product-title"><%= products[i].title %></h4>
+                        </a>
+                        <img width="250" height="300" alt="<%= products[i].title %>" src="<%= products[i].thumbnail %>">
+
+                        <% if(user) { %>
+                            <button value="<%= products[i]._id %>" class="like-each-small add-fav">
+                                <i class="material-icons" id="changeontoggle">favorite</i>
+                            </button>
+                        <% } else { %>
+                            <div  class="like-each-small " onclick="logintoadd()">
+                                <i class="material-icons" >favorite</i>
+                            </div>
+                        <% } %>
+                        <div class="product-btns">
+                            <p>$<span class="product-price"><%= parseFloat(products[i].price).toFixed(2) %></span></p>
+                            <!-- <button value="<%= products[i]._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></button> -->
+                            <a href="/add/cart/<%= products[i]._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></a>
+                        </div>
+                        <input type="hidden" value="<%= products[i]._id %>">
+                    </div>
+                <% } %>
+            <% } else { %>
+                <% for(let i =0; i < 4; i++) { %>
+                
+                    <div class="product-each card product">
+                        <a href="/product/<%= products[i].slug %>">
+                            <h4 class="product-title"><%= products[i].title %></h4>
+                        </a>
+                        <img width="250" height="300" alt="<%= products[i].title %>" src="<%= products[i].thumbnail %>">
+
+                        <% if(user) { %>
+                            <button value="<%= products[i]._id %>" class="like-each-small add-fav">
+                                <i class="material-icons" id="changeontoggle">favorite</i>
+                            </button>
+                        <% } else { %>
+                            <div  class="like-each-small " onclick="logintoadd()">
+                                <i class="material-icons" >favorite</i>
+                            </div>
+                        <% } %>
+                        <div class="product-btns">
+                            <p>$<span class="product-price"><%= parseFloat(products[i].price).toFixed(2) %></span></p>
+                            <button value="<%= products[i]._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></button>
+                        </div>
+                        <input type="hidden" value="<%= products[i]._id %>">
+                    </div>
+                <% } %>
+            <% } %>
+            <!---to here-->
+           
+
+
+            <!-------------->
+        </div>
+    </div>
+    </div>
+
+</section>
+
+
+
+    <div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+    <script src="/public/js/single.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/public/js/addfav.js"></script>
+    <script>
+        function logintoadd(){
+            alert('SIGN IN to add favorites')
+        }
+    </script>
+
+<%- include('partials/footer.ejs') %>
+ 

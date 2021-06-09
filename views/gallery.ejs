@@ -1,0 +1,18 @@
+<%- include('partials/header.ejs') %>
+
+<div class="card listed-product-title">
+    <p>Gallery</p>
+</div>
+
+<section class="container center">
+    <% photos.forEach(photo => { %>
+        <% photo.forEach(pic => { %>
+            <img width="200" height="200" class="z-depth-1" src="<%= pic %>" alt="">
+        <% }) %>
+    <% }) %>
+</section>
+    
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,69 @@
+<%- include('partials/header.ejs') %>
+
+
+
+
+<div class="card listed-product-title">
+    <p>All of my oders</p>
+</div>
+
+
+
+    <br><br><br>
+        
+    <section class="container ">
+        <% oders.forEach(element => { %>
+            <div class="z-depth-1">
+            <!--all irems-->
+            <% element.oders.forEach(item => { %>
+                <div class="cart-item ">
+                    
+                    <div class="cartimg">
+                        <img src="<%= item.product.thumbnail %>" alt="">
+                    </div>
+                    <div class="price">
+                        <span class=""><%= item.product.title %></span>
+                    </div>
+                    <div class="carttotal">
+                     
+                        <span class="greenincart"> <small>$</small> <%= item.Quantity *  item.product.price %></span>
+                    </div>
+
+
+                    <div class="qnty">
+                        <span class="qtyprice"> <small>quantity</small> <%= item.Quantity %> </span>
+                    </div>
+                   
+                
+                </div>
+                <div class="spancenter">
+                    <span class="carthalfline"></span>
+                </div>
+            <% }); %>
+            <!--all irems-->
+
+
+            <div class="cart-item cart-end">
+                <div class="cartimg"></div>
+                <div class="price"></div>
+                <div class="qnty"></div>
+                <div class="carttotal">Total:<span class=" thistest greenincart"> $ <%= element.total[0].TotalValue %> </span> </div>
+
+                <div class="carttotal">total quantity:<span class=" thistest "> <%= element.total[0].TotalQuantity %> </span> </div>
+
+            </div>
+           
+        </div>
+        <br>
+        <br>
+        <% }) %>
+
+    </section>
+
+
+
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+
+<%- include('partials/footer.ejs') %>

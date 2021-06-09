@@ -1,0 +1,155 @@
+<%- include('partials/header.ejs') %>
+
+
+<section class="container ">
+    <div class="row user-profile">
+        <div class="col s12 m12 l12">
+            <div class="card">
+                <div class="card-image">
+                    <img class="user-profile-background-image" src="/public/img/showfive.jpg">
+                    <div class=" btn-floating left profile-image halfway-fab">
+                        <img class="" src="/public/img/avater.png" alt="">
+                    </div>
+                    <% if(user){ %>
+                        <% if(user.id == userid) { %>
+                            <div data-target="modal1" class=" right modal-trigger fortheuserinfo">
+                                <!--show this to id belongs-->
+                                <i class="material-icons right">settings</i>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="card-content heading-user">
+                    
+                    
+                    <p><%= userinfo.name %> 
+                        <%- userrolehtml %>
+                    </p>
+                    
+                    
+                    <% if(user){ %>
+                        <% if(user.id == userid) { %>
+                            <% if(user.role === 'seller'){ %>
+                                <p>
+                                    <a href="/user/my/requests">
+                                        <!--sellers users-->
+                                        <span class="green-color-user">Seller Dashboard > </span>
+                                    </a>
+                                </p>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                    
+                    <% if(user){ %>
+                        <% if(user.id == userid) { %>
+                            <p>
+                                <a href="/user/oders/<%= user.id %>">
+                                    <!--normal users-->
+                                    <span class="green-color-user">MY oders > </span>
+                                </a>
+                            </p>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal1" class="modal">
+        <!--show this to id belongs-->
+        <div class="modal-content user-settings-model">
+            <h4>User settings</h4>
+            <hr>
+            <div class="user-settinglist">
+                <ul>
+                    <li><a href="">Terms and use</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <% if(user) { %>
+                    <li><a onclick="myFunction()" href="/user/delete/<%= user.id %>">delete my account</a></li>
+                    <% } %>
+                    <li><a href="/user/logout"> <span class="seller-in-user logout-btn">logout</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close  btn-flat">Close</a>
+        </div>
+    </div>
+</section>
+
+<% if( userrole === 'seller' ) { %>
+<div class="card listed-product-title">
+    <p>All listed products</p>
+</div>
+
+<section class="container">
+    <div class="product-all">
+        <div class="product-list">
+
+            <!--form hree   12 -->
+            <% if(userinfo.products.length > 0) { %>
+                <% userinfo.products.forEach(product => { %>
+                    <div class="product-each card product">
+                        <a href="/product/<%= product.slug %>">
+                            <h4 class="product-title"><%= product.title %></h4>
+                        </a>
+                        <img width="250" height="300" src="<%= product.thumbnail %>">
+
+                        <% if(user) { %>
+                            <button value="<%= product._id %>" class="like-each-small add-fav">
+                                <i class="material-icons" id="changeontoggle">favorite</i>
+                            </button>
+                        <% } else { %>
+                            <div  class="like-each-small " onclick="logintoadd()">
+                                <i class="material-icons" >favorite</i>
+                            </div>
+                        <% } %>
+
+                        <% if(user){ %>
+                            <% if(user.role === 'seller'){ %>
+                                <% if(user.id == userid) { %>
+                                    <a href="/product/edit/<%= product._id %>">
+                                        <div class="like-each-next">
+                                            <i class="material-icons">edit</i>
+                                            <small>manage</small>
+                                        </div>
+                                    </a>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                        <div class="product-btns">
+                            <p>$<span class="product-price"><%= product.price %></span></p>
+                            <a href="/add/cart/<%= product._id %>" class="add-cart small-cart-btn"><i class="material-icons">add_shopping_cart</i></a>
+                        </div>
+                        <input type="hidden" value="<%= product._id %>">
+                    </div>
+                <% }) %>
+            <% } %>
+            <!---to here-->
+         
+            <!-------------->
+        </div>
+    </div>
+    </div>
+
+
+</section>
+<% } %>
+
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+<script>
+    function myFunction() {
+      confirm("ARE YOU SURE YOU WANT TO DELETE YOUR ID ?");
+    }
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/public/js/addfav.js"></script>
+<script>
+    function logintoadd(){
+        alert('SIGN IN to add favorites')
+    }
+</script>
+
+<%- include('partials/footer.ejs') %>
+ 

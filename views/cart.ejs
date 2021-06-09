@@ -1,0 +1,130 @@
+<%- include('partials/header.ejs') %>
+
+<% if(typeof cart == 'undefined') { %>
+    <div style="height: 250px;" class="fixcraxyspaceimaidiot"></div>
+    <section class="container">
+        <div class="itemcheck">
+            <p>no items in the cart</p>
+        </div>
+    </section>
+<% } else { %>
+
+<section class="container ">
+
+    <div class="cart-item cart-head">
+        <div class="cartimg">
+            Product
+        </div>
+        <div class="price">
+            price
+        </div>
+        <div class="qnty">
+            Quantity
+        </div>
+        <div class="carttotal">
+            Total
+        </div>
+        <div class="cartcencal">
+        </div>
+    </div>
+
+    <% let totalamount = 0; %>  
+    <% let quantitytotal = 0; %>
+    <!--all irems-->
+    <% cart.forEach((product) => { %>
+        <% let total = parseFloat(product.qty * product.price).toFixed(2) %>
+        <% let quantity = product.qty %>
+        <% totalamount += +total %>
+        <% quantitytotal += +product.qty %>
+
+        <div class="cart-item">
+            <div class="cartimg">
+                <img src="<%= product.thumbnail %>" alt="<%= product.title %>">
+            </div>
+            <div class="price">
+                <span class="greenincart"> $ <%= parseFloat(product.price).toFixed(2) %></span>
+            </div>
+            <div class="qnty">
+                <a href="/cart/update/<%= product.productID %>?action=remove">
+                    <i class="material-icons grayincart">navigate_before</i>
+                </a>
+                    <span class="qtyprice"><%= product.qty %> </span>
+                <a href="/cart/update/<%= product.productID %>?action=add">
+                    <i class="material-icons grayincart">navigate_next</i>
+                </a>
+            </div>
+            <div class="carttotal">
+                <span class="greenincart"> $ <%= total %></span>
+            </div>
+            <div class="cartcencal">
+                <a href="/cart/update/<%= product.productID %>?action=clear">
+                    <span><i class="material-icons redincart">clear</i></span>
+                </a>
+            </div>
+        </div>
+        <div class="spancenter">
+            <span class="carthalfline"></span>
+        </div>
+    <% }) %>
+    <!--all irems-->
+
+
+    <div class="cart-item cart-end">
+        <div class="cartimg"></div>
+        <div class="price"></div>
+        <div class="qnty">Quantity:<span class=" thistest greenincart"> <%= quantitytotal %> </span> </div>
+        <div class="carttotal">Total:<span class=" thistest greenincart"> $ <%=  parseFloat(totalamount).toFixed(2) %> </span> </div>
+        <div class="cartcencal">
+            <a href="/cart/clear">
+                <span class="redincart">remove all</span>
+            </a>
+        </div>
+    </div>
+</section>
+    <% if(user){ %>
+        <section class="container cartbuyconferm">
+            <div class="cartuserinfo">
+                <div class="usrinfo">
+                    <ul class="collapsible">
+                        <li>
+                        <div class="collapsible-header">confirm your details - ( click here ) </div>
+                        <div class="collapsible-body">
+                            <ul class="ulspace">
+                                <li>Name: <span class="greeninfo"><%= user.name %></span></li>
+                                <span class="carthalfline"></span>
+                                <li>Addess:  <span class="greeninfo"><%= user.address %></span></li>
+                                <span class="carthalfline"></span>
+                                <li>Zipcode:  <span class="greeninfo"><%= user.zipcode %></span></li>
+                                <span class="carthalfline"></span>
+                                <li>Phone NO.:  <span class="greeninfo"><%= user.phone %></span></li>
+                                <span class="carthalfline"></span>
+                                <li>Email:  <span class="greeninfo"><%= user.email %></span></li>
+                            </ul>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lastbtn">
+                    <form action="/cart/submit" method="post">
+                        <input type="hidden" name="TotalValue" value="<%=  parseFloat(totalamount).toFixed(2) %>">
+                        <input type="hidden" name="TotalQuantity" value="<%= quantitytotal %>">
+                        
+                        <button class="btn red lighten-1"> MAKE ODER </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    <% } else { %>
+        <!--sign in to doer-->
+        <div style="height: 50px;" class="fixcraxyspaceimaidiot"></div>
+        <section class="container checlbtn cartbuyconferm">
+            <a href="/sign-in" class="btn red lighten-1"> sign in to ODER </a>
+        </section>
+    <% } %>
+
+<% } %>
+
+<div style="height: 400px;" class="fixcraxyspaceimaidiot"></div>
+
+
+<%- include('partials/footer.ejs') %>

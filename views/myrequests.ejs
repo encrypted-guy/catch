@@ -1,0 +1,130 @@
+<%- include('partials/header.ejs') %>
+
+
+
+<section class="container dashboard">
+
+    <div class="dasheach z-depth-1">
+        <div class="dashheading">
+            <h4>revenue</h4>
+        </div>
+        <div class="dashtext">
+            <main class="textdash">
+                <span> <%= revenue %> <span style="color: #01E37F"> <small>USD</small> </span> </span>
+            </main>
+        </div>
+    </div>
+    <div class="dasheach z-depth-1">
+        <div class="dashheading">
+            <h4>profit</h4>
+        </div>
+        <div class="dashtext">
+            <main class="textdash">
+                <span> <%= profit %> <span style="color: #01E37F"> <small>USD</small> </span> </span>
+            </main>
+        </div>
+    </div>
+    <div class="dasheach z-depth-1">
+        <div class="dashheading">
+            <h4>NO. of orders</h4>
+        </div>
+        <div class="dashtext">
+            <main class="textdash">
+                <span> <%= odernumber %> .<small>oders</small> </span>
+            </main>
+        </div>
+    </div>
+   
+
+</section>
+
+<div class="card listed-product-title">
+    <p>requested products</p>
+</div>
+
+
+
+<section class="container ">
+    <% let check = true || 1; %>
+
+    <% alloders.forEach(element => { %>
+        <% if(check) { %>
+            <% let eachtotal = 0; %>
+            <% let qty = 0; %> 
+            <div class="z-depth-1">
+                <!--all irems-->
+                <% element.oders.forEach(item => { %>
+                    <% if(item.product.seller == user.id) { %>
+                        <% let total = parseFloat(item.Quantity *  item.product.price).toFixed(2) %>
+                        <% eachtotal += +total %>
+                        <% qty += +item.Quantity; %>
+                        <div class="cart-item ">
+
+                            <div class="cartimg">
+                                <img src="<%= item.product.thumbnail %>" alt="">
+                            </div>
+                            <div class="price">
+                                <span class=""><%= item.product.title %></span>
+                                
+                            </div>
+
+                                   <!-- <span class=""><%= item.product.seller %></span> -->
+
+                            <div class="carttotal">
+
+                                <!-- <span class="greenincart"> <small>$</small> <%= item.Quantity *  item.product.price %></span> -->
+                                <span class="greenincart"> <small>$</small> <%= parseFloat(item.Quantity *  item.product.price).toFixed(2) %></span>
+                            </div>
+
+
+                            <div class="qnty">
+                                <span class="qtyprice"> <small>quantity</small> <%= item.Quantity %> </span>
+                            </div>
+
+
+                        </div>
+                        <div class="spancenter">
+                            <span class="carthalfline"></span>
+                        </div>
+                    <% } %>
+                <% }) %>
+                <!--all irems-->
+
+
+                <div class="cart-item cart-end">
+                    <div class="cartimg"></div>
+                    <div class="price"></div>
+                    <div class="qnty"></div>
+                    <div class="carttotal">Total:<span class=" thistest greenincart"> $ <%= eachtotal %>
+                        </span> </div>
+
+                    <div class="carttotal">total quantity:<span class=" thistest "> <%= qty %>
+                        </span> </div>
+
+                </div>
+                <div class=" lefteruser">
+                    <p><b>buyer details</b></p>
+                    <ul>
+                        <li><b>name:</b> <%= element.buyerID.name %></li>
+                        <li><b>address:</b> <%= element.buyerID.address %></li>
+                        <li><b>zipcode:</b> <%= element.buyerID.zipcode %></li>
+                        <li><b>city:</b> <%= element.buyerID.city %></li>
+                        <li><b>phone:</b> <%= element.buyerID.phone %></li>
+                        <li><b>email:</b> <%= element.buyerID.email %></li>
+                        <br>
+                    </ul>
+                </div>
+
+            </div>
+            <br>
+            <br>
+        <% } %>
+    <% }) %>
+</section>
+
+
+<div style="height: 350px;" class="fixcraxyspaceimaidiot"></div>
+
+
+
+<%- include('partials/footer.ejs') %>
